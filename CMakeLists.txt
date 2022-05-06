@@ -20,7 +20,7 @@ endif()
 add_executable(main main.cpp Needlemachine.cpp)
 
 # Copy resources folder to build folder
-file(COPY ${CMAKE_SOURCE_DIR}/resources  DESTINATION ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE_INIT})
+# file(COPY ${CMAKE_SOURCE_DIR}/resources  DESTINATION ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE_INIT})
 
 # Test
 enable_testing()

@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     string seq1 = "GATTACA";
     string seq2 = "CGATACG";
     array<string, 3> optimalAlignment;
-    long optimalScore;
+    int32_t optimalScore;
 
     ifstream sample1(argv[1]);
     if (!sample1.is_open())

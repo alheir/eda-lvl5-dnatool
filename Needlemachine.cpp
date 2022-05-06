@@ -40,8 +40,6 @@ void initMat(Cell **&mat, size_t &rows, size_t &cols, const string &seq1, const 
         mat[i] = new Cell[cols];
 
     // Inicializar matriz
-    mat[0][0] = 0;
-
     for (int i = 1; i < cols; i++)
         mat[0][i] = HORIZONTAL;
 
@@ -49,21 +47,17 @@ void initMat(Cell **&mat, size_t &rows, size_t &cols, const string &seq1, const 
         mat[i][0] = VERTICAL;
 }
 
-long fillMat(Cell **mat, size_t rows, size_t cols, const string &seq1, const string &seq2)
+int32_t fillMat(Cell **mat, size_t rows, size_t cols, const string &seq1, const string &seq2)
 {
-    vector<long> prevColumn(rows);
-    vector<long> currentColumn(rows);
+    vector<int32_t> prevColumn(rows);
+    vector<int32_t> currentColumn(rows);
 
-    for (size_t i = 0; i < cols; i++)
+    // First column
+    for (size_t u = 0; u < rows; u++)
+        prevColumn[u] = -u;
+
+    for (size_t i = 1; i < cols; i++)
     {
-        if (!i)
-        {
-            for (size_t u = 0; u < rows; u++)
-                prevColumn[u] = -u;
-
-            continue;
-        }
-
         currentColumn[0] = -i;
 
         for (size_t j = 1; j < rows; j++)
@@ -81,7 +75,7 @@ long fillMat(Cell **mat, size_t rows, size_t cols, const string &seq1, const str
             int32_t max = INT32_MIN;
             mat[j][i] = -1;
 
-            // TODO: se está guardando una sola dirección
+            // Buscamos alguna direccion optima
             for (uint8_t u = 0; u < 3; u++)
             {
                 if (scores[u] >= max)
@@ -99,8 +93,8 @@ long fillMat(Cell **mat, size_t rows, size_t cols, const string &seq1, const str
     return currentColumn.back();
 }
 
-// TODO poner este prototipo con menos de 100 caracteres
-void alignMat(Cell **mat, size_t rows, size_t cols, const string &seq1, const string &seq2, array<string, 3> &output)
+void alignMat(Cell **mat, size_t rows, size_t cols, const string &seq1,
+              const string &seq2, array<string, 3> &output)
 {
     array<char, 3> terna;
 
@@ -135,9 +129,14 @@ void alignMat(Cell **mat, size_t rows, size_t cols, const string &seq1, const st
             break;
         }
     }
+
+    reverse(output[0].begin(), output[0].end());
+    reverse(output[1].begin(), output[1].end());
+    reverse(output[2].begin(), output[2].end());
+
 }
 
-long getGlobalAlignment(const string &seq1, const string &seq2, array<string, 3> &alignment)
+int32_t getGlobalAlignment(const string &seq1, const string &seq2, array<string, 3> &alignment)
 {
     Cell **mat = NULL;
     size_t rows = 0;
@@ -147,22 +146,10 @@ long getGlobalAlignment(const string &seq1, const string &seq2, array<string, 3>
     initMat(mat, rows, cols, seq1, seq2);
 
     // (2) Llenar la matriz
-    long bestScore = fillMat(mat, rows, cols, seq1, seq2);
-
-    // printMat(mat, rows, cols);
+    int32_t bestScore = fillMat(mat, rows, cols, seq1, seq2);
 
     // (3) Alinear
     alignMat(mat, rows, cols, seq1, seq2, alignment);
-
-    // cout << "len: " << alignment.size() << endl;
-
-    reverse(alignment[0].begin(), alignment[0].end());
-    reverse(alignment[1].begin(), alignment[1].end());
-    reverse(alignment[2].begin(), alignment[2].end());
-
-    // cout << alignment[0].data() << endl;
-    // cout << alignment[1].data() << endl;
-    // cout << alignment[2].data() << endl;
 
     // Liberar memoria
     for (size_t i = 0; i < rows; i++)
