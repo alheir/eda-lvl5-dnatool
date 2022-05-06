@@ -15,20 +15,20 @@ bool isACGT(char c);
 
 int main(int argc, char **argv)
 {
-    string seq1 = "GATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACA";
-    string seq2 = "CGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACG";
-    array<string,3> optimalAlignment;
+    string seq1 = "GATTACA";
+    string seq2 = "CGATACG";
+    array<string, 3> optimalAlignment;
     long optimalScore;
 
     ifstream sample1(argv[1]);
-    if(!sample1.is_open())
+    if (!sample1.is_open())
     {
         cout << "Error opening " << argv[1] << endl;
         return 1;
     }
 
     ifstream sample2(argv[2]);
-    if(!sample2.is_open())
+    if (!sample2.is_open())
     {
         cout << "Error opening " << argv[2] << endl;
         return 1;
@@ -39,14 +39,17 @@ int main(int argc, char **argv)
 
     optimalScore = getGlobalAlignment(seq1, seq2, optimalAlignment);
 
-    cout << "Puntaje óptimo: " << optimalScore << endl << endl;
-    cout << "Alineamiento óptimo: " << endl << endl;
+    cout << "Puntaje óptimo: " << optimalScore << endl
+         << endl;
+    cout << "Alineamiento óptimo: " << endl
+         << endl;
 
     for (int i = 0; i < optimalAlignment[0].length(); i += splitter)
     {
         cout << optimalAlignment[0].substr(i, splitter).data() << endl;
         cout << optimalAlignment[1].substr(i, splitter).data() << endl;
-        cout << optimalAlignment[2].substr(i, splitter).data() << endl << endl;
+        cout << optimalAlignment[2].substr(i, splitter).data() << endl
+             << endl;
     }
 
     cout << endl;

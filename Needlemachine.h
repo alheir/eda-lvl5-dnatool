@@ -5,21 +5,13 @@
 #include <vector>
 #include <array>
 
-typedef union
-{
-    int32_t word;
-    struct
-    {
-        int32_t score : 29;
-        int32_t bestDir : 3;
-    };
-} Cell;
+typedef uint8_t Cell;
 
-void initMat(Cell **mat, size_t &rows, size_t &cols, const std::string &seq1,
+void initMat(Cell **&mat, size_t &rows, size_t &cols, const std::string &seq1,
              const std::string &seq2);
-void fillMat(Cell **mat, size_t rows, size_t cols, const std::string &seq1,
+long fillMat(Cell **mat, size_t rows, size_t cols, const std::string &seq1,
              const std::string &seq2);
-long alignMat(Cell **mat, size_t rows, size_t cols, const std::string &seq1,
+void alignMat(Cell **mat, size_t rows, size_t cols, const std::string &seq1,
               const std::string &seq2, std::array<std::string, 3> &output);
 
 long getGlobalAlignment(const std::string &seq1, const std::string &seq2,
