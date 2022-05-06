@@ -4,18 +4,6 @@
 #include <algorithm>
 #include <cstdio>
 
-
-typedef union
-{
-    int32_t word;
-    struct
-    {
-        int32_t score : 29;
-        //int32_t directions : 3;
-        int32_t bestDir : 3;
-    };
-} Cell;
-
 typedef enum {VERTICAL, DIAGONAL, HORIZONTAL} Direction;
 
 static const char matchScore = 1;
@@ -33,6 +21,32 @@ void printMat(Cell** mat, size_t rows, size_t cols)
             printf("% -d\t", mat[i][j].score);
         }
         cout << endl;
+    }
+}
+
+void initMat(Cell** mat, size_t& rows, size_t& cols, const string &seq1, const string &seq2)
+{
+    rows = seq1.length()+1; // cant filas
+    cols = seq2.length()+1; // cant columnas
+
+    mat = new Cell * [rows];
+    
+    for(size_t i=0; i < rows; i++)
+        mat[i] = new Cell[cols];
+
+    // Inicializar matriz
+    mat[0][0].score = 0;
+
+    for(int i = 1; i < cols; i++)
+    {
+        mat[0][i].score = mat[0][i-1].score + indelScore;
+        mat[0][i].bestDir = HORIZONTAL;
+    }
+
+    for(int i = 1; i < rows; i++)
+    {
+        mat[i][0].score = mat[i-1][0].score + indelScore;
+        mat[i][0].bestDir = VERTICAL;
     }
 }
 
@@ -71,10 +85,10 @@ void fillMat(Cell** mat, size_t rows, size_t cols, const string &seq1, const str
 }
 
 
-//TODO poner esta funcion con menos de 100 caracteres
+//TODO poner este prototipo con menos de 100 caracteres
 long alignMat(Cell** mat, size_t rows, size_t cols, const string &seq1, const string &seq2, array<string,3>& output)
 {
-    long alignScore;
+    long alignScore = 0;
     array<char,3> terna;
 
     size_t i = rows-1;
@@ -117,47 +131,17 @@ long alignMat(Cell** mat, size_t rows, size_t cols, const string &seq1, const st
 
 long getGlobalAlignment(const string &seq1, const string &seq2, array<string,3>  &alignment)
 {
-    size_t rows = seq1.length()+1; // cant filas
-    size_t cols = seq2.length()+1; // cant columnas
+    Cell** mat = NULL;
+    size_t rows = 0;
+    size_t cols = 0;
 
-    Cell** mat = new Cell * [rows];
-    
-    for(size_t i=0; i < rows; i++)
-        mat[i] = new Cell[cols];
+    // (1) Inicializar la Matriz
+    initMat(mat, rows, cols, seq1, seq2);
 
-    // Inicializar matriz
-    mat[0][0].score = 0;
-
-    for(int i = 1; i < cols; i++)
-    {
-        mat[0][i].score = mat[0][i-1].score + indelScore;
-        mat[0][i].bestDir = HORIZONTAL;
-    }
-
-    for(int i = 1; i < rows; i++)
-    {
-        mat[i][0].score = mat[i-1][0].score + indelScore;
-        mat[i][0].bestDir = VERTICAL;
-    }
-    
-    // Llenar la matriz
+    // (2) Llenar la matriz
     fillMat(mat, rows, cols, seq1, seq2);
 
-    printMat(mat, rows, cols);
-
-    cout << endl << "\nDirections:\n";
-    for (size_t i = 0; i < rows; i++)
-    {
-        for (size_t j = 0; j < cols; j++)
-        {
-            int32_t bestDir = mat[i][j].bestDir;
-            cout << bestDir << "  ";
-        }
-        cout << endl;
-    }
-
-
-    // Alinear
+    // (3) Alinear
     alignMat(mat, rows, cols, seq1, seq2, alignment);
 
     cout << "len: " << alignment.size() << endl;

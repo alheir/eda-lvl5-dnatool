@@ -17,15 +17,14 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     add_link_options(-fsanitize=undefined)
 endif()
 
-add_executable(main main.cpp GenData.cpp Needlemachine.cpp)
-add_executable(devtest devtest.cpp GenData.cpp)
+add_executable(main main.cpp Needlemachine.cpp)
 
 # Copy resources folder to build folder
-file(COPY ${CMAKE_SOURCE_DIR}/resources DESTINATION ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE_INIT})
+file(COPY ${CMAKE_SOURCE_DIR}/resources  DESTINATION ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE_INIT})
 
 # Test
 enable_testing()
 
-add_executable(main_test main_test.cpp GenData.cpp)
+add_executable(main_test main_test.cpp Needlemachine.cpp)
 
 add_test(NAME test1 COMMAND main_test)

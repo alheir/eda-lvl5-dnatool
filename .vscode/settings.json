@@ -43,12 +43,15 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "bit": "cpp"
+        "bit": "cpp",
+        "cstring": "cpp"
     },
     "cmake.debugConfig": {
         "args": [
             "\"../resources/reference/Alpha B.1.1.7 - MZ314997.txt\"",
             "\"../resources/reference/Delta B.1.617.2 - OM202516.txt\"",
+            ">",
+            "output.txt"
         ],
     },
 }
