@@ -24,7 +24,7 @@ void printMat(Cell** mat, size_t rows, size_t cols)
     }
 }
 
-void initMat(Cell** mat, size_t& rows, size_t& cols, const string &seq1, const string &seq2)
+void initMat(Cell**& mat, size_t& rows, size_t& cols, const string &seq1, const string &seq2)
 {
     rows = seq1.length()+1; // cant filas
     cols = seq2.length()+1; // cant columnas
@@ -86,7 +86,7 @@ void fillMat(Cell** mat, size_t rows, size_t cols, const string &seq1, const str
 
 
 //TODO poner este prototipo con menos de 100 caracteres
-long alignMat(Cell** mat, size_t rows, size_t cols, const string &seq1, const string &seq2, array<string,3>& output)
+int32_t alignMat(Cell** mat, size_t rows, size_t cols, const string &seq1, const string &seq2, array<string,3>& output)
 {
     long alignScore = 0;
     array<char,3> terna;
@@ -124,12 +124,15 @@ long alignMat(Cell** mat, size_t rows, size_t cols, const string &seq1, const st
         }
     }
 
-    //reverse(output.begin(), output.end());
+    // Voltear las cadenas
+    reverse(output[0].begin(), output[0].end());
+    reverse(output[1].begin(), output[1].end());
+    reverse(output[2].begin(), output[2].end());
 
     return alignScore;
 }
 
-long getGlobalAlignment(const string &seq1, const string &seq2, array<string,3>  &alignment)
+int32_t getGlobalAlignment(const string &seq1, const string &seq2, array<string,3>  &alignment)
 {
     Cell** mat = NULL;
     size_t rows = 0;
@@ -144,17 +147,12 @@ long getGlobalAlignment(const string &seq1, const string &seq2, array<string,3> 
     // (3) Alinear
     alignMat(mat, rows, cols, seq1, seq2, alignment);
 
-    cout << "len: " << alignment.size() << endl;
+    // cout << "len: " << alignment.size() << endl;
+    // cout << alignment[0].data() << endl;
+    // cout << alignment[1].data() << endl;
+    // cout << alignment[2].data() << endl;
 
-    reverse(alignment[0].begin(), alignment[0].end());
-    reverse(alignment[1].begin(), alignment[1].end());
-    reverse(alignment[2].begin(), alignment[2].end());
-
-    cout << alignment[0].data() << endl;
-    cout << alignment[1].data() << endl;
-    cout << alignment[2].data() << endl;
-
-    long bestAlignment = mat[rows - 1][cols - 1].score;
+    int32_t bestAlignment = mat[rows - 1][cols - 1].score;
 
     // Liberar memoria
     for(size_t i=0; i < rows; i++)

@@ -3,6 +3,7 @@ project(main VERSION 0.1.0)
 
 set(CMAKE_CXX_STANDARD 11)
 
+# Imprimir informacion para debuggear
 set(CTEST_OUTPUT_ON_FAILURE ON)
 
 # From "Working with CMake" documentation:
