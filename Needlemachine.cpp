@@ -17,40 +17,40 @@ static const char indelScore = -1;
 
 using namespace std;
 
-void printMat(Cell **mat, size_t rows, size_t cols)
+void printMat(DirectionMat &mat, size_t rows, size_t cols)
 {
     for (size_t i = 0; i < rows; i++)
     {
         for (size_t j = 0; j < cols; j++)
         {
-            printf("%d\t", mat[i][j]);
+            printf("%d\t", mat.at(i, j));
         }
         cout << endl;
     }
 }
 
-void initMat(Cell **&mat, size_t &rows, size_t &cols, const string &seq1, const string &seq2)
+DirectionMat* initMat(size_t &rows, size_t &cols, const string &seq1, const string &seq2)
 {
     rows = seq1.length() + 1; // cant filas
     cols = seq2.length() + 1; // cant columnas
 
-    mat = new Cell *[rows];
-
-    for (size_t i = 0; i < rows; i++)
-        mat[i] = new Cell[cols];
+    DirectionMat* mat = new DirectionMat(rows, cols);
 
     // Inicializar matriz
     for (int i = 1; i < cols; i++)
-        mat[0][i] = HORIZONTAL;
+        mat->set(HORIZONTAL, 0, i);
 
     for (int i = 1; i < rows; i++)
-        mat[i][0] = VERTICAL;
+        mat->set(VERTICAL, i, 0);
+
+    return mat;
 }
 
-int32_t fillMat(Cell **mat, size_t rows, size_t cols, const string &seq1, const string &seq2)
+int32_t fillMat(DirectionMat &mat, size_t rows, size_t cols, const string &seq1, const string &seq2)
 {
     vector<int32_t> prevColumn(rows);
     vector<int32_t> currentColumn(rows);
+    int32_t scores[3];
 
     // First column
     for (size_t u = 0; u < rows; u++)
@@ -62,26 +62,25 @@ int32_t fillMat(Cell **mat, size_t rows, size_t cols, const string &seq1, const 
 
         for (size_t j = 1; j < rows; j++)
         {
-            int32_t scores[3];
 
             scores[VERTICAL] = currentColumn[j - 1] + indelScore;
             scores[HORIZONTAL] = prevColumn[j] + indelScore;
 
-            if (seq1.at(j - 1) == seq2.at(i - 1))
+            if (seq1[j - 1] == seq2[i - 1])
                 scores[DIAGONAL] = prevColumn[j - 1] + matchScore;
             else
                 scores[DIAGONAL] = prevColumn[j - 1] + substScore;
 
-            int32_t max = INT32_MIN;
-            mat[j][i] = -1;
+            int32_t max = scores[0];
+            mat.set(0, j, i);
 
             // Buscamos alguna direccion optima
-            for (uint8_t u = 0; u < 3; u++)
+            for (uint8_t u = 1; u < 3; u++)
             {
                 if (scores[u] >= max)
                 {
                     max = scores[u];
-                    mat[j][i] = u; // Guarda dirección optimizadora (solo una)
+                    mat.set(u, j, i); // Guarda dirección optimizadora (solo una)
                 }
             }
             currentColumn[j] = max; // Guarda puntaje de la celda
@@ -93,7 +92,7 @@ int32_t fillMat(Cell **mat, size_t rows, size_t cols, const string &seq1, const 
     return currentColumn.back();
 }
 
-void alignMat(Cell **mat, size_t rows, size_t cols, const string &seq1,
+void alignMat(DirectionMat &mat, size_t rows, size_t cols, const string &seq1,
               const string &seq2, array<string, 3> &output)
 {
     array<char, 3> terna;
@@ -102,7 +101,8 @@ void alignMat(Cell **mat, size_t rows, size_t cols, const string &seq1,
     size_t j = cols - 1;
     while (i >= 1 || j >= 1)
     {
-        switch (mat[i][j])
+        uint8_t val = mat.at(i,j); 
+        switch (val)
         {
         case VERTICAL:
             output[0].push_back(seq1.at(i - 1));
@@ -138,24 +138,23 @@ void alignMat(Cell **mat, size_t rows, size_t cols, const string &seq1,
 
 int32_t getGlobalAlignment(const string &seq1, const string &seq2, array<string, 3> &alignment)
 {
-    Cell **mat = NULL;
+    // DirectionMat* mat = NULL;
     size_t rows = 0;
     size_t cols = 0;
 
     // (1) Inicializar la Matriz
-    initMat(mat, rows, cols, seq1, seq2);
+    DirectionMat* mat = initMat(rows, cols, seq1, seq2);
 
     // (2) Llenar la matriz
-    int32_t bestScore = fillMat(mat, rows, cols, seq1, seq2);
+    int32_t bestScore = fillMat(*mat, rows, cols, seq1, seq2);
+
+    // printMat(*mat, rows, cols);
 
     // (3) Alinear
-    alignMat(mat, rows, cols, seq1, seq2, alignment);
+    alignMat(*mat, rows, cols, seq1, seq2, alignment);
 
     // Liberar memoria
-    for (size_t i = 0; i < rows; i++)
-        delete[] mat[i];
-
-    delete[] mat;
+    delete mat;
 
     return bestScore;
 }
