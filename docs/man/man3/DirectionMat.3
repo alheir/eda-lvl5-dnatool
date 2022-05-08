@@ -1,0 +1,103 @@
+.TH "DirectionMat" 3 "Sun May 8 2022" "DNATool" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DirectionMat
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <DirectionMat\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDirectionMat\fP (size_t rows, size_t cols)"
+.br
+.ti -1c
+.RI "\fB~DirectionMat\fP ()"
+.br
+.ti -1c
+.RI "uint8_t \fBat\fP (size_t row, size_t col)"
+.br
+.RI "Reads a given DirectionMap cell\&. "
+.ti -1c
+.RI "void \fBset\fP (uint8_t val, size_t row, size_t col)"
+.br
+.RI "Writes a given DirecitonMat cell\&. "
+.ti -1c
+.RI "size_t \fBgetRows\fP ()"
+.br
+.RI "Returns the \fBDirectionMat\fP row size\&. "
+.ti -1c
+.RI "size_t \fBgetCols\fP ()"
+.br
+.RI "Returns the \fBDirectionMat\fP column size\&. "
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "DirectionMat::DirectionMat (size_t rows, size_t cols)"
+
+.SS "DirectionMat::~DirectionMat ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "uint8_t DirectionMat::at (size_t row, size_t col)"
+
+.PP
+Reads a given DirectionMap cell\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIrow\fP 
+.br
+\fIcol\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+uint8_t 
+.RE
+.PP
+
+.SS "size_t DirectionMat::getCols ()"
+
+.PP
+Returns the \fBDirectionMat\fP column size\&. 
+.PP
+\fBReturns\fP
+.RS 4
+size_t 
+.RE
+.PP
+
+.SS "size_t DirectionMat::getRows ()"
+
+.PP
+Returns the \fBDirectionMat\fP row size\&. 
+.PP
+\fBReturns\fP
+.RS 4
+size_t 
+.RE
+.PP
+
+.SS "void DirectionMat::set (uint8_t val, size_t row, size_t col)"
+
+.PP
+Writes a given DirecitonMat cell\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIval\fP Data to store 
+.br
+\fIrow\fP 
+.br
+\fIcol\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DNATool from the source code\&.

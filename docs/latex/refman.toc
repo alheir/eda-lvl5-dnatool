@@ -1,0 +1,69 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}eda-\/lvl5-\/dnatool}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Class Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Class List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}File Index}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}File List}{5}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Class Documentation}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Cell Struct Reference}{7}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Member Data Documentation}{7}{subsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.1}c0}{7}{subsubsection.4.1.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.2}c1}{7}{subsubsection.4.1.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.1.3}c2}{7}{subsubsection.4.1.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.1.4}c3}{8}{subsubsection.4.1.1.4}%
+\contentsline {section}{\numberline {4.2}Direction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mat Class Reference}{8}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Constructor \& Destructor Documentation}{8}{subsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.1.1}DirectionMat()}{8}{subsubsection.4.2.1.1}%
+\contentsline {subsubsection}{\numberline {4.2.1.2}$\sim $DirectionMat()}{8}{subsubsection.4.2.1.2}%
+\contentsline {subsection}{\numberline {4.2.2}Member Function Documentation}{8}{subsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.2.1}at()}{8}{subsubsection.4.2.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2.2}getCols()}{9}{subsubsection.4.2.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.2.3}getRows()}{9}{subsubsection.4.2.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.2.4}set()}{9}{subsubsection.4.2.2.4}%
+\contentsline {chapter}{\numberline {5}File Documentation}{11}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Aligner.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{11}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Detailed Description}{12}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Enumeration Type Documentation}{12}{subsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.2.1}Direction}{12}{subsubsection.5.1.2.1}%
+\contentsline {subsection}{\numberline {5.1.3}Function Documentation}{12}{subsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.3.1}buildAligment()}{12}{subsubsection.5.1.3.1}%
+\contentsline {subsubsection}{\numberline {5.1.3.2}fillMat()}{13}{subsubsection.5.1.3.2}%
+\contentsline {subsubsection}{\numberline {5.1.3.3}getGlobalAlignment()}{13}{subsubsection.5.1.3.3}%
+\contentsline {subsubsection}{\numberline {5.1.3.4}initMat()}{14}{subsubsection.5.1.3.4}%
+\contentsline {subsubsection}{\numberline {5.1.3.5}printMat()}{14}{subsubsection.5.1.3.5}%
+\contentsline {section}{\numberline {5.2}Aligner.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{14}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Detailed Description}{15}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Function Documentation}{15}{subsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.2.1}buildAligment()}{15}{subsubsection.5.2.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2.2}fillMat()}{15}{subsubsection.5.2.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.2.3}getGlobalAlignment()}{15}{subsubsection.5.2.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.2.4}initMat()}{15}{subsubsection.5.2.2.4}%
+\contentsline {section}{\numberline {5.3}Aligner.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{16}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Direction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mat.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{16}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Detailed Description}{16}{subsection.5.4.1}%
+\contentsline {section}{\numberline {5.5}Direction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mat.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{17}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Detailed Description}{17}{subsection.5.5.1}%
+\contentsline {section}{\numberline {5.6}Direction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mat.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{17}{section.5.6}%
+\contentsline {section}{\numberline {5.7}GBReader.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{18}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Detailed Description}{18}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Function Documentation}{19}{subsection.5.7.2}%
+\contentsline {subsubsection}{\numberline {5.7.2.1}getSequence()}{19}{subsubsection.5.7.2.1}%
+\contentsline {subsubsection}{\numberline {5.7.2.2}notIsACGT()}{19}{subsubsection.5.7.2.2}%
+\contentsline {section}{\numberline {5.8}GBReader.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{19}{section.5.8}%
+\contentsline {subsection}{\numberline {5.8.1}Detailed Description}{20}{subsection.5.8.1}%
+\contentsline {subsection}{\numberline {5.8.2}Function Documentation}{20}{subsection.5.8.2}%
+\contentsline {subsubsection}{\numberline {5.8.2.1}getSequence()}{20}{subsubsection.5.8.2.1}%
+\contentsline {section}{\numberline {5.9}GBReader.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{20}{section.5.9}%
+\contentsline {section}{\numberline {5.10}main.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{21}{section.5.10}%
+\contentsline {subsection}{\numberline {5.10.1}Detailed Description}{21}{subsection.5.10.1}%
+\contentsline {subsection}{\numberline {5.10.2}Function Documentation}{21}{subsection.5.10.2}%
+\contentsline {subsubsection}{\numberline {5.10.2.1}main()}{21}{subsubsection.5.10.2.1}%
+\contentsline {section}{\numberline {5.11}main\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}test.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{22}{section.5.11}%
+\contentsline {subsection}{\numberline {5.11.1}Detailed Description}{22}{subsection.5.11.1}%
+\contentsline {subsection}{\numberline {5.11.2}Function Documentation}{22}{subsection.5.11.2}%
+\contentsline {subsubsection}{\numberline {5.11.2.1}main()}{23}{subsubsection.5.11.2.1}%
+\contentsline {subsubsection}{\numberline {5.11.2.2}testAlignment()}{23}{subsubsection.5.11.2.2}%
+\contentsline {subsubsection}{\numberline {5.11.2.3}testFillMat()}{23}{subsubsection.5.11.2.3}%
+\contentsline {subsubsection}{\numberline {5.11.2.4}testMatInit()}{23}{subsubsection.5.11.2.4}%
+\contentsline {section}{\numberline {5.12}README.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md File Reference}{23}{section.5.12}%
+\contentsline {chapter}{Index}{25}{section*.11}%

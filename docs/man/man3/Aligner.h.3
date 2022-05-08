@@ -1,0 +1,89 @@
+.TH "Aligner.h" 3 "Sun May 8 2022" "DNATool" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Aligner.h \- Genetic sequence aligner, based on Needleman-Wunsch algorithm\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <string>\fP
+.br
+\fC#include <array>\fP
+.br
+\fC#include 'DirectionMat\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDirectionMat\fP * \fBinitMat\fP (const size_t rows, const size_t cols)"
+.br
+.RI "Initializes a \fBDirectionMat\fP for storing Needleman-Wunsch directions\&. "
+.ti -1c
+.RI "int32_t \fBfillMat\fP (\fBDirectionMat\fP *mat, const std::string &seq1, const std::string &seq2)"
+.br
+.ti -1c
+.RI "void \fBbuildAligment\fP (\fBDirectionMat\fP *mat, const std::string &seq1, const std::string &seq2, std::array< std::string, 3 > &output)"
+.br
+.ti -1c
+.RI "int32_t \fBgetGlobalAlignment\fP (const std::string &seq1, const std::string &seq2, std::array< std::string, 3 > &alignment)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Genetic sequence aligner, based on Needleman-Wunsch algorithm\&. 
+
+
+.PP
+\fBAuthors\fP
+.RS 4
+DALZOTTO, Rafael; HEIR, Alejandro - Grupo 7 
+.RE
+.PP
+\fBVersion\fP
+.RS 4
+0\&.1 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2022-05-08
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2022 - 22\&.08 EDA - ITBA 
+.RE
+.PP
+
+.SH "Function Documentation"
+.PP 
+.SS "void buildAligment (\fBDirectionMat\fP * mat, const std::string & seq1, const std::string & seq2, std::array< std::string, 3 > & output)"
+
+.SS "int32_t fillMat (\fBDirectionMat\fP * mat, const std::string & seq1, const std::string & seq2)"
+
+.SS "int32_t getGlobalAlignment (const std::string & seq1, const std::string & seq2, std::array< std::string, 3 > & alignment)"
+
+.SS "\fBDirectionMat\fP * initMat (const size_t rows, const size_t cols)"
+
+.PP
+Initializes a \fBDirectionMat\fP for storing Needleman-Wunsch directions\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIrows\fP 
+.br
+\fIcols\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+DirectionMat* 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for DNATool from the source code\&.
