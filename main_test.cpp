@@ -122,74 +122,33 @@ int main()
 
     istringstream sampleFile1(sampleString1), sampleFile2(sampleString2);
 
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
     // Expected output
     string expectedSeq1 = "GATTACA";
     string expectedSeq2 = "CGATACG";
-    size_t expectedRows = expectedSeq1.length() + 1;
-    size_t expectedCols = expectedSeq2.length() + 1;
+    size_t expectedRows = 8;
+    size_t expectedCols = 8;
 
     DirectionMat expectedMat(expectedRows, expectedCols);
+    uint8_t hardcodedMat[8][8] = {
+        {2, 2, 2, 2, 2, 2, 2, 2},
+        {0, 1, 1, 2, 2, 2, 2, 1},
+        {0, 0, 0, 1, 2, 1, 2, 2},
+        {0, 0, 0, 0, 1, 2, 2, 2},
+        {0, 0, 0, 0, 0, 1, 1, 1},
+        {0, 0, 0, 0, 0, 1, 2, 2},
+        {0, 1, 0, 0, 0, 0, 1, 2},
+        {0, 0, 1, 0, 0, 0, 0, 1},
+    };
 
-    for (int i = 0; i < expectedCols; i++)
-        expectedMat.set(2, 0, i);
-    for (int i = 1; i < expectedRows; i++)
-        expectedMat.set(0, i, 0);
-
-    expectedMat.set(1, 1, 1);
-    expectedMat.set(1, 1, 2);
-    expectedMat.set(2, 1, 3);
-    expectedMat.set(2, 1, 4);
-    expectedMat.set(2, 1, 5);
-    expectedMat.set(2, 1, 6);
-    expectedMat.set(1, 1, 7);
-
-    expectedMat.set(0, 2, 1);
-    expectedMat.set(0, 2, 2);
-    expectedMat.set(1, 2, 3);
-    expectedMat.set(2, 2, 4);
-    expectedMat.set(1, 2, 5);
-    expectedMat.set(2, 2, 6);
-    expectedMat.set(2, 2, 7);
-
-    expectedMat.set(0, 3, 1);
-    expectedMat.set(0, 3, 2);
-    expectedMat.set(0, 3, 3);
-    expectedMat.set(1, 3, 4);
-    expectedMat.set(2, 3, 5);
-    expectedMat.set(2, 3, 6);
-    expectedMat.set(2, 3, 7);
-
-    expectedMat.set(0, 4, 1);
-    expectedMat.set(0, 4, 2);
-    expectedMat.set(0, 4, 3);
-    expectedMat.set(0, 4, 4);
-    expectedMat.set(1, 4, 5);
-    expectedMat.set(1, 4, 6);
-    expectedMat.set(1, 4, 7);
-
-    expectedMat.set(0, 5, 1);
-    expectedMat.set(0, 5, 2);
-    expectedMat.set(0, 5, 3);
-    expectedMat.set(0, 5, 4);
-    expectedMat.set(1, 5, 5);
-    expectedMat.set(2, 5, 6);
-    expectedMat.set(2, 5, 7);
-
-    expectedMat.set(1, 6, 1);
-    expectedMat.set(0, 6, 2);
-    expectedMat.set(0, 6, 3);
-    expectedMat.set(0, 6, 4);
-    expectedMat.set(0, 6, 5);
-    expectedMat.set(1, 6, 6);
-    expectedMat.set(2, 6, 7);
-
-    expectedMat.set(0, 7, 1);
-    expectedMat.set(1, 7, 2);
-    expectedMat.set(0, 7, 3);
-    expectedMat.set(0, 7, 4);
-    expectedMat.set(0, 7, 5);
-    expectedMat.set(0, 7, 6);
-    expectedMat.set(1, 7, 7);
+    for (int i = 0; i < expectedRows; i++)
+    {
+        for (int j = 0; j < expectedCols; j++)
+        {
+            expectedMat.set(hardcodedMat[i][j], i, j);
+        }
+    }
 
     int32_t expectedScore = 2;
     array<string, 3> expectedAlignment = {
@@ -197,9 +156,11 @@ int main()
         " ||| ||*",
         "CGAT-ACG"};
 
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
     // Test 1
     string extractedSeq1, extractedSeq2;
-    if(!getSequence(extractedSeq1, sampleFile1))
+    if (!getSequence(extractedSeq1, sampleFile1))
     {
         cout << "Failure in sequence 1 extraction\n";
         return -1;
@@ -211,7 +172,7 @@ int main()
     }
     cout << "Sequence 1 extraction success!\n";
 
-    if(!getSequence(extractedSeq2, sampleFile2))
+    if (!getSequence(extractedSeq2, sampleFile2))
     {
         cout << "Failure in sequence 2 extraction\n";
         return -1;
@@ -223,21 +184,29 @@ int main()
     }
     cout << "Sequence 2 extraction success!\n";
 
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
     // Test 2
     DirectionMat *mat;
     if (!testMatInit(mat, extractedSeq1, extractedSeq2, expectedMat))
         return -1;
     cout << "Mat Init success!\n";
 
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
     // Test 3
     if (!testFillMat(mat, extractedSeq1, extractedSeq2, expectedScore, expectedMat))
         return -1;
     cout << "Fill Mat test success!\n";
 
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
     // Test 4
     if (!testAlignment(mat, extractedSeq1, extractedSeq2, expectedAlignment))
         return -1;
     cout << "Alignment test success!\n";
+
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
     // Liberar memoria
     delete mat;
