@@ -1,0 +1,130 @@
+
+Secuencias comparadas: 
+	../reference/Alpha B.1.1.7 - MZ314997.txt
+	Mystery genome 1 - OV806939.txt
+
+Puntaje óptimo: 29730
+Elapsed time in seconds: 55 s
+
+Secuencias comparadas: 
+	../reference/Beta B.1.351 - MZ314996.txt
+	Mystery genome 1 - OV806939.txt
+
+Puntaje óptimo: 29771
+Elapsed time in seconds: 59 s
+
+Secuencias comparadas: 
+	../reference/Delta B.1.617.2 - OM202516.txt
+	Mystery genome 1 - OV806939.txt
+
+Puntaje óptimo: 29826
+Elapsed time in seconds: 42 s
+
+Secuencias comparadas: 
+	../reference/Gamma P.1 - MW642250.txt
+	Mystery genome 1 - OV806939.txt
+
+Puntaje óptimo: 29727
+Elapsed time in seconds: 42 s
+
+Secuencias comparadas: 
+	../reference/Omicron B.1.1.529 BA.1 - OM432158.txt
+	Mystery genome 1 - OV806939.txt
+
+Puntaje óptimo: 29696
+Elapsed time in seconds: 42 s
+
+Secuencias comparadas: 
+	../reference/Omicron B.1.1.529 BA.2 - OM617939.txt
+	Mystery genome 1 - OV806939.txt
+
+Puntaje óptimo: 29701
+Elapsed time in seconds: 42 s
+
+
+Secuencias comparadas: 
+	../reference/Alpha B.1.1.7 - MZ314997.txt
+	Mystery genome 2 - MT345875.txt
+
+Puntaje óptimo: 29822
+Elapsed time in seconds: 25 s
+
+Secuencias comparadas: 
+	../reference/Beta B.1.351 - MZ314996.txt
+	Mystery genome 2 - MT345875.txt
+
+Puntaje óptimo: 29865
+Elapsed time in seconds: 25 s
+
+Secuencias comparadas: 
+	../reference/Delta B.1.617.2 - OM202516.txt
+	Mystery genome 2 - MT345875.txt
+
+Puntaje óptimo: 29807
+Elapsed time in seconds: 25 s
+
+Secuencias comparadas: 
+	../reference/Gamma P.1 - MW642250.txt
+	Mystery genome 2 - MT345875.txt
+
+Puntaje óptimo: 29821
+Elapsed time in seconds: 24 s
+
+Secuencias comparadas: 
+	../reference/Omicron B.1.1.529 BA.1 - OM432158.txt
+	Mystery genome 2 - MT345875.txt
+
+Puntaje óptimo: 29774
+Elapsed time in seconds: 24 s
+
+Secuencias comparadas: 
+	../reference/Omicron B.1.1.529 BA.2 - OM617939.txt
+	Mystery genome 2 - MT345875.txt
+
+Puntaje óptimo: 29777
+Elapsed time in seconds: 25 s
+
+
+Secuencias comparadas: 
+	../reference/Alpha B.1.1.7 - MZ314997.txt
+	Mystery genome 3 - OU772970.txt
+
+Puntaje óptimo: 29745
+Elapsed time in seconds: 41 s
+
+Secuencias comparadas: 
+	../reference/Beta B.1.351 - MZ314996.txt
+	Mystery genome 3 - OU772970.txt
+
+Puntaje óptimo: 29786
+Elapsed time in seconds: 54 s
+
+Secuencias comparadas: 
+	../reference/Delta B.1.617.2 - OM202516.txt
+	Mystery genome 3 - OU772970.txt
+
+Puntaje óptimo: 29840
+Elapsed time in seconds: 64 s
+
+Secuencias comparadas: 
+	../reference/Gamma P.1 - MW642250.txt
+	Mystery genome 3 - OU772970.txt
+
+Puntaje óptimo: 29742
+Elapsed time in seconds: 61 s
+
+Secuencias comparadas: 
+	../reference/Omicron B.1.1.529 BA.1 - OM432158.txt
+	Mystery genome 3 - OU772970.txt
+
+Puntaje óptimo: 29711
+Elapsed time in seconds: 59 s
+
+Secuencias comparadas: 
+	../reference/Omicron B.1.1.529 BA.2 - OM617939.txt
+	Mystery genome 3 - OU772970.txt
+
+Puntaje óptimo: 29716
+Elapsed time in seconds: 62 s
+
+Total execution time: 780 s

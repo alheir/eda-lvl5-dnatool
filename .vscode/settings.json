@@ -45,12 +45,13 @@
         "typeinfo": "cpp",
         "bit": "cpp",
         "cstring": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "variant": "cpp"
     },
     "cmake.debugConfig": {
         "args": [
             "\"../resources/reference/Alpha B.1.1.7 - MZ314997.txt\"",
-            "\"../resources/reference/Delta B.1.617.2 - OM202516.txt\"",
+            "\"../resources/test/Mystery genome 1 - OV806939.txt\"",
             ">",
             "\"output.txt\""
         ],
