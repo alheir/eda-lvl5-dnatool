@@ -18,12 +18,15 @@
 #include "Aligner.h"
 
 using namespace std;
+using namespace chrono;
 
-static const int splitter = 60;
+static const int splitInterval = 60;
+
+void printTimeDiff(time_point<steady_clock>& timestamp);
 
 int main(int argc, char **argv)
 {
-    auto startTime = chrono::steady_clock::now();
+    auto startTime = steady_clock::now();
 
     ifstream sample1(argv[1]);
     if (!sample1.is_open())
@@ -70,24 +73,29 @@ int main(int argc, char **argv)
     cout << "Alineamiento óptimo: " << endl
          << endl;
 
-    for (int i = 0; i < optimalAlignment[0].length(); i += splitter)
+    for (int i = 0; i < optimalAlignment[0].length(); i += splitInterval)
     {
-        cout << optimalAlignment[0].substr(i, splitter).data() << endl;
-        cout << optimalAlignment[1].substr(i, splitter).data() << endl;
-        cout << optimalAlignment[2].substr(i, splitter).data() << endl
+        cout << optimalAlignment[0].substr(i, splitInterval).data() << endl;
+        cout << optimalAlignment[1].substr(i, splitInterval).data() << endl;
+        cout << optimalAlignment[2].substr(i, splitInterval).data() << endl
              << endl;
     }
 
     cout << endl;
 
-    auto endTime = chrono::steady_clock::now();
-
-    cout << "Elapsed time in milliseconds: "
-         << chrono::duration_cast<chrono::milliseconds>(endTime - startTime).count()
-         << " ms" << endl;
-    cout << "Elapsed time in seconds: "
-         << chrono::duration_cast<chrono::seconds>(endTime - startTime).count()
-         << " s" << endl;
+    printTimeDiff(startTime);
 
     return 0;
+}
+
+void printTimeDiff(time_point<steady_clock>& timestamp)
+{
+    auto now = steady_clock::now();
+
+    cout << "Elapsed time in milliseconds: "
+         << duration_cast<milliseconds>(now - timestamp).count()
+         << " ms" << endl;
+    cout << "Elapsed time in seconds: "
+         << duration_cast<seconds>(now - timestamp).count()
+         << " s" << endl;
 }

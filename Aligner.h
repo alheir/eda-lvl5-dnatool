@@ -8,20 +8,19 @@
  * @copyright Copyright (c) 2022 - 22.08 EDA - ITBA
  *
  */
-
-#ifndef NEEDLEMACHINE_H
-#define NEEDLEMACHINE_H
+#ifndef ALIGNER_H
+#define ALIGNER_H
 
 #include <string>
 #include <array>
 
 #include "DirectionMat.h"
 
-DirectionMat *initMat(const size_t rows, const size_t cols);
+void initMat(DirectionMat &mat);
 
-int32_t fillMat(DirectionMat *mat, const std::string &seq1, const std::string &seq2);
+int32_t fillMat(DirectionMat &mat, const std::string &seq1, const std::string &seq2);
 
-void buildAligment(DirectionMat *mat, const std::string &seq1, const std::string &seq2,
+void buildAligment(DirectionMat &mat, const std::string &seq1, const std::string &seq2,
               std::array<std::string, 3> &output);
 
 int32_t getGlobalAlignment(const std::string &seq1, const std::string &seq2,

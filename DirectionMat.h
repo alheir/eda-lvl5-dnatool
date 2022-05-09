@@ -8,9 +8,8 @@
  * @copyright Copyright (c) 2022 - 22.08 EDA - ITBA
  *
  */
-
-#ifndef CELL_H
-#define CELL_H
+#ifndef DIRECTIONMAT_H
+#define DIRECTIONMAT_H
 
 #include <iostream> // size_t
 #include <stdint.h>
@@ -21,13 +20,16 @@
 #include <random>
 #include <algorithm>
 
+/**
+ * @brief DirCell contains 4 directions in a single byte
+ */
 typedef struct
 {
-    uint8_t c0 : 2;
-    uint8_t c1 : 2;
-    uint8_t c2 : 2;
-    uint8_t c3 : 2;
-} Cell;
+    uint8_t d0 : 2;
+    uint8_t d1 : 2;
+    uint8_t d2 : 2;
+    uint8_t d3 : 2;
+} DirCell;
 
 class DirectionMat
 {
@@ -42,7 +44,7 @@ public:
     size_t getCols();
 
 private:
-    Cell *data;
+    DirCell *data;
 
     size_t compactCols;
     size_t rows;

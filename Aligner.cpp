@@ -27,20 +27,25 @@ static const char matchScore = 1;
 static const char substScore = -1;
 static const char indelScore = -1;
 
+static const char matchSymbol = '|';
+static const char indelSymbol = ' ';
+static const char substSymbol = '*';
+static const char separator = '-';
+
 using namespace std;
 
 /**
- * @brief Prints the given DirectionMat
+ * @brief Prints the given DirectionMat, used for debugging
  *
- * @param mat
+ * @param mat initialized DirectionMat
  */
-void printMat(DirectionMat *mat)
+void printMat(DirectionMat& mat)
 {
-    for (size_t i = 0; i < mat->getRows(); i++)
+    for (size_t i = 0; i < mat.getRows(); i++)
     {
-        for (size_t j = 0; j < mat->getCols(); j++)
+        for (size_t j = 0; j < mat.getCols(); j++)
         {
-            printf("%d\t", mat->at(i, j));
+            cout << mat.at(i, j) << '\t';
         }
         cout << endl;
     }
@@ -51,20 +56,15 @@ void printMat(DirectionMat *mat)
  *
  * @param rows
  * @param cols
- * @return DirectionMat*
  */
-DirectionMat *initMat(const size_t rows, const size_t cols)
+void initMat(DirectionMat &mat)
 {
-    DirectionMat *mat = new DirectionMat(rows, cols);
-
     // Inicializar matriz
-    for (int i = 0; i < cols; i++)
-        mat->set(HORIZONTAL, 0, i);
+    for (int i = 0; i < mat.getCols(); i++)
+        mat.set(HORIZONTAL, 0, i);
 
-    for (int i = 1; i < rows; i++)
-        mat->set(VERTICAL, i, 0);
-
-    return mat;
+    for (int i = 1; i < mat.getRows(); i++)
+        mat.set(VERTICAL, i, 0);
 }
 
 /**
@@ -75,10 +75,10 @@ DirectionMat *initMat(const size_t rows, const size_t cols)
  * @param seq2 String with one acgt-like genetic sequence.
  * @return int32_t Optimal score
  */
-int32_t fillMat(DirectionMat *mat, const string &seq1, const string &seq2)
+int32_t fillMat(DirectionMat &mat, const string &seq1, const string &seq2)
 {
-    auto rows = mat->getRows();
-    auto cols = mat->getCols();
+    size_t rows = mat.getRows();
+    size_t cols = mat.getCols();
 
     vector<int32_t> previousColumn(rows);
     vector<int32_t> currentColumn(rows);
@@ -95,7 +95,6 @@ int32_t fillMat(DirectionMat *mat, const string &seq1, const string &seq2)
 
         for (size_t j = 1; j < rows; j++)
         {
-
             scores[VERTICAL] = currentColumn[j - 1] + indelScore;
             scores[HORIZONTAL] = previousColumn[j] + indelScore;
 
@@ -104,29 +103,12 @@ int32_t fillMat(DirectionMat *mat, const string &seq1, const string &seq2)
             else
                 scores[DIAGONAL] = previousColumn[j - 1] + substScore;
 
-            /*
-            int32_t max = scores[0];
-            mat->set(0, j, i);
-
-            // Buscamos alguna direccion optima
-            for (uint8_t u = 1; u < 3; u++)
-            {
-                if (scores[u] >= max)
-                {
-                    max = scores[u];
-                    mat->set(u, j, i); // Guarda dirección optimizadora (solo una)
-                }
-            }
-            currentColumn[j] = max; // Guarda puntaje de la celda
-            */
-
             // Iterador al primer máximo
             auto maxIterator = max_element(scores.begin(), scores.end());
 
             currentColumn[j] = *maxIterator;              // Guarda el puntaje
-            mat->set(maxIterator - scores.begin(), j, i); // Guarda la dirección
+            mat.set(maxIterator - scores.begin(), j, i); // Guarda la dirección
         }
-
         previousColumn = currentColumn;
     }
 
@@ -142,47 +124,43 @@ int32_t fillMat(DirectionMat *mat, const string &seq1, const string &seq2)
  * @param seq2 String with one acgt-like genetic sequence.
  * @param output 3-string array to store the optimal alignment.
  */
-void buildAligment(DirectionMat *mat, const string &seq1, const string &seq2, array<string, 3> &output)
+void buildAligment(DirectionMat &mat, const string &seq1, const string &seq2, array<string, 3> &output)
 {
-    size_t i = mat->getRows() - 1;
-    size_t j = mat->getCols() - 1;
+    size_t i = mat.getRows() - 1;
+    size_t j = mat.getCols() - 1;
 
     while (i >= 1 || j >= 1)
     {
-        uint8_t val = mat->at(i, j);
+        uint8_t val = mat.at(i, j);
 
         switch (val)
         {
         case VERTICAL:
             output[0].push_back(seq1.at(i - 1));
-            output[1].push_back(' ');
-            output[2].push_back('-');
+            output[1].push_back(indelSymbol);
+            output[2].push_back(separator);
             i--;
             break;
 
         case DIAGONAL:
             output[0].push_back(seq1.at(i - 1));
-            output[1].push_back((seq1.at(i - 1) == seq2.at(j - 1)) ? '|' : '*');
+            output[1].push_back((seq1.at(i - 1) == seq2.at(j - 1)) ? matchSymbol : substSymbol);
             output[2].push_back(seq2.at(j - 1));
             i--;
             j--;
             break;
 
         case HORIZONTAL:
-            output[0].push_back('-');
-            output[1].push_back(' ');
+            output[0].push_back(separator);
+            output[1].push_back(indelSymbol);
             output[2].push_back(seq2.at(j - 1));
             j--;
-            break;
-
-        default:
             break;
         }
     }
 
-    reverse(output[0].begin(), output[0].end());
-    reverse(output[1].begin(), output[1].end());
-    reverse(output[2].begin(), output[2].end());
+    for(auto &str : output)
+        reverse(str.begin(), str.end());
 }
 
 /**
@@ -191,21 +169,19 @@ void buildAligment(DirectionMat *mat, const string &seq1, const string &seq2, ar
  * @param seq1 String with one acgt-like genetic sequence.
  * @param seq2 String with one acgt-like genetic sequence.
  * @param alignment 3-string array to store the optimal alignment.
- * @return int32_t Optimal score
+ * @return int32_t Optimal alignment score
  */
 int32_t getGlobalAlignment(const string &seq1, const string &seq2, array<string, 3> &alignment)
 {
     // (1) Inicializar la Matriz
-    DirectionMat *mat = initMat(seq1.length() + 1, seq2.length() + 1);
+    DirectionMat mat(seq1.length() + 1, seq2.length() + 1);
+    initMat(mat);
 
     // (2) Llenar la matriz
     int32_t bestScore = fillMat(mat, seq1, seq2);
 
     // (3) Alinear
     buildAligment(mat, seq1, seq2, alignment);
-
-    // Liberar memoria
-    delete mat;
 
     return bestScore;
 }

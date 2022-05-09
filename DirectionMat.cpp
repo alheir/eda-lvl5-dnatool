@@ -18,7 +18,7 @@ DirectionMat::DirectionMat(size_t rows, size_t cols)
 
     compactCols = (cols / 4) + (cols % 4 != 0);
 
-    data = new Cell[compactCols * rows];
+    data = new DirCell[compactCols * rows];
 }
 
 DirectionMat::~DirectionMat()
@@ -35,21 +35,19 @@ DirectionMat::~DirectionMat()
  */
 uint8_t DirectionMat::at(size_t row, size_t col)
 {
-    Cell cell = data[(compactCols * row) + (col / 4)];
-
     switch (col % 4)
     {
     case 0:
-        return cell.c0;
+        return data[(compactCols * row) + (col / 4)].d0;
         break;
     case 1:
-        return cell.c1;
+        return data[(compactCols * row) + (col / 4)].d1;
         break;
     case 2:
-        return cell.c2;
+        return data[(compactCols * row) + (col / 4)].d2;
         break;
     case 3:
-        return cell.c3;
+        return data[(compactCols * row) + (col / 4)].d3;
         break;
     }
     return 0;
@@ -69,16 +67,16 @@ void DirectionMat::set(uint8_t val, size_t row, size_t col)
     switch (col % 4)
     {
     case 0:
-        data[index].c0 = val;
+        data[index].d0 = val;
         break;
     case 1:
-        data[index].c1 = val;
+        data[index].d1 = val;
         break;
     case 2:
-        data[index].c2 = val;
+        data[index].d2 = val;
         break;
     case 3:
-        data[index].c3 = val;
+        data[index].d3 = val;
         break;
     }
 }

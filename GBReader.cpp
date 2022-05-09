@@ -22,7 +22,7 @@ using namespace std;
  * @return true It's not
  * @return false It is
  */
-bool notIsACGT(char c)
+bool isNotACGT(char c)
 {
     return !(c == 'a' || c == 'c' || c == 'g' || c == 't');
 }
@@ -56,7 +56,7 @@ bool getSequence(string &output, istream &file)
         if (checker = (tempStr.substr(0, 2) == "//"))
             break;
 
-        tempStr.erase(remove_if(tempStr.begin(), tempStr.end(), notIsACGT), tempStr.end());
+        tempStr.erase(remove_if(tempStr.begin(), tempStr.end(), isNotACGT), tempStr.end());
 
         output.append(tempStr);
     }
