@@ -87,11 +87,11 @@ int32_t fillMat(DirectionMat &mat, const string &seq1, const string &seq2)
 
     // First column
     for (size_t u = 0; u < rows; u++)
-        previousColumn[u] = -u;
+        previousColumn[u] = u * indelScore;
 
     for (size_t i = 1; i < cols; i++)
     {
-        currentColumn[0] = -i;
+        currentColumn[0] = i * indelScore;
 
         for (size_t j = 1; j < rows; j++)
         {
