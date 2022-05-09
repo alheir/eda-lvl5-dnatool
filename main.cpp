@@ -22,7 +22,7 @@ using namespace chrono;
 
 static const int splitInterval = 60;
 
-void printTimeDiff(time_point<steady_clock>& timestamp);
+void printElapsedFrom(time_point<steady_clock>& timestamp);
 
 int main(int argc, char **argv)
 {
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
     string seq1;
     if (!getSequence(seq1, sample1))
     {
-        cout << "Error extracting first sequence..." << endl;
+        cout << "Error extracting first sequence...\n";
         return 1;
     }
     sample1.close();
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     string seq2;
     if (!getSequence(seq2, sample2))
     {
-        cout << "Error extracting second sequence..." << endl;
+        cout << "Error extracting second sequence...\n";
         return 1;
     }
     sample2.close();
@@ -63,32 +63,28 @@ int main(int argc, char **argv)
 
     optimalScore = getGlobalAlignment(seq1, seq2, optimalAlignment);
 
-    cout << "Secuencias comparadas: " << endl;
+    cout << "Secuencias comparadas: \n";
     cout << '\t' << argv[1] << endl;
-    cout << '\t' << argv[2] << endl
-         << endl;
+    cout << '\t' << argv[2] << endl;
 
-    cout << "Puntaje óptimo: " << optimalScore << endl
-         << endl;
-    cout << "Alineamiento óptimo: " << endl
-         << endl;
+    cout << "\nPuntaje óptimo: " << optimalScore;
+    cout << "\n\nAlineamiento óptimo: \n\n";
 
     for (int i = 0; i < optimalAlignment[0].length(); i += splitInterval)
     {
         cout << optimalAlignment[0].substr(i, splitInterval).data() << endl;
         cout << optimalAlignment[1].substr(i, splitInterval).data() << endl;
-        cout << optimalAlignment[2].substr(i, splitInterval).data() << endl
-             << endl;
+        cout << optimalAlignment[2].substr(i, splitInterval).data() << "\n\n";
     }
 
     cout << endl;
 
-    printTimeDiff(startTime);
+    printElapsedFrom(startTime);
 
     return 0;
 }
 
-void printTimeDiff(time_point<steady_clock>& timestamp)
+void printElapsedFrom(time_point<steady_clock>& timestamp)
 {
     auto now = steady_clock::now();
 
