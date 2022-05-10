@@ -1,7 +1,7 @@
 /**
  * @file DirectionMat.h
  * @authors DALZOTTO, Rafael; HEIR, Alejandro - Grupo 7
- * @brief Implements 2 bit-size matrix cells.
+ * @brief Implements 2 bit-size matrix cells optimized for memory usage.
  * @version 0.1
  * @date 2022-05-08
  *
@@ -11,14 +11,7 @@
 #ifndef DIRECTIONMAT_H
 #define DIRECTIONMAT_H
 
-#include <iostream> // size_t
-#include <stdint.h>
-
-#include <vector>
-#include <chrono>
 #include <iostream>
-#include <random>
-#include <algorithm>
 
 /**
  * @brief DirCell contains 4 directions in a single byte
@@ -34,21 +27,20 @@ typedef struct
 class DirectionMat
 {
 public:
-    DirectionMat(size_t rows, size_t cols);
+    DirectionMat(const size_t rows, const size_t cols);
     ~DirectionMat();
 
     uint8_t at(size_t row, size_t col);
     void set(uint8_t val, size_t row, size_t col);
+    void print();
 
-    size_t getRows();
-    size_t getCols();
+    const size_t rows;
+    const size_t cols;
 
 private:
     DirCell *data;
 
     size_t compactCols;
-    size_t rows;
-    size_t cols;
 };
 
 #endif

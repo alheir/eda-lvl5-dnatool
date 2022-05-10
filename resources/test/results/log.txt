@@ -1,0 +1,11 @@
+
+Elapsed time in milliseconds: 33784 ms
+Elapsed time in seconds: 33 s
+
+Secuencias comparadas: 
+	MERS-CoV.txt
+	../reference/Wuhan reference genome - NC_045512.2.txt
+
+Puntaje óptimo: 7240
+
+Total execution time: 34 s

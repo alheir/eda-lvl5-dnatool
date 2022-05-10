@@ -11,7 +11,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <chrono>
 
 #include "GBReader.h"
@@ -22,7 +21,7 @@ using namespace chrono;
 
 static const int splitInterval = 60;
 
-void printElapsedFrom(time_point<steady_clock>& timestamp);
+void printElapsedFrom(time_point<steady_clock> &timestamp);
 
 int main(int argc, char **argv)
 {
@@ -63,7 +62,9 @@ int main(int argc, char **argv)
 
     optimalScore = getGlobalAlignment(seq1, seq2, optimalAlignment);
 
-    cout << "Secuencias comparadas: \n";
+    printElapsedFrom(startTime);
+
+    cout << "\nSecuencias comparadas: \n";
     cout << '\t' << argv[1] << endl;
     cout << '\t' << argv[2] << endl;
 
@@ -79,12 +80,10 @@ int main(int argc, char **argv)
 
     cout << endl;
 
-    printElapsedFrom(startTime);
-
     return 0;
 }
 
-void printElapsedFrom(time_point<steady_clock>& timestamp)
+void printElapsedFrom(time_point<steady_clock> &timestamp)
 {
     auto now = steady_clock::now();
 

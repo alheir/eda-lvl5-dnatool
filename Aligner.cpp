@@ -12,9 +12,9 @@
 #include "Aligner.h"
 
 #include <iostream>
-#include <cstring>
+#include <cstdint>
 #include <algorithm>
-#include <cstdio>
+#include <vector>
 
 typedef enum
 {
@@ -35,23 +35,6 @@ static const char separator = '-';
 using namespace std;
 
 /**
- * @brief Prints the given DirectionMat, used for debugging
- *
- * @param mat initialized DirectionMat
- */
-void printMat(DirectionMat& mat)
-{
-    for (size_t i = 0; i < mat.getRows(); i++)
-    {
-        for (size_t j = 0; j < mat.getCols(); j++)
-        {
-            cout << mat.at(i, j) << '\t';
-        }
-        cout << endl;
-    }
-}
-
-/**
  * @brief Initializes a DirectionMat for storing Needleman-Wunsch directions.
  *
  * @param rows
@@ -60,10 +43,10 @@ void printMat(DirectionMat& mat)
 void initMat(DirectionMat &mat)
 {
     // Inicializar matriz
-    for (int i = 0; i < mat.getCols(); i++)
+    for (int i = 0; i < mat.cols; i++)
         mat.set(HORIZONTAL, 0, i);
 
-    for (int i = 1; i < mat.getRows(); i++)
+    for (int i = 1; i < mat.rows; i++)
         mat.set(VERTICAL, i, 0);
 }
 
@@ -77,8 +60,8 @@ void initMat(DirectionMat &mat)
  */
 int32_t fillMat(DirectionMat &mat, const string &seq1, const string &seq2)
 {
-    size_t rows = mat.getRows();
-    size_t cols = mat.getCols();
+    size_t rows = mat.rows;
+    size_t cols = mat.cols;
 
     vector<int32_t> previousColumn(rows);
     vector<int32_t> currentColumn(rows);
@@ -106,7 +89,7 @@ int32_t fillMat(DirectionMat &mat, const string &seq1, const string &seq2)
             // Iterador al primer máximo
             auto maxIterator = max_element(scores.begin(), scores.end());
 
-            currentColumn[j] = *maxIterator;              // Guarda el puntaje
+            currentColumn[j] = *maxIterator;             // Guarda el puntaje
             mat.set(maxIterator - scores.begin(), j, i); // Guarda la dirección
         }
         previousColumn = currentColumn;
@@ -124,11 +107,13 @@ int32_t fillMat(DirectionMat &mat, const string &seq1, const string &seq2)
  * @param seq2 String with one acgt-like genetic sequence.
  * @param output 3-string array to store the optimal alignment.
  */
-void buildAligment(DirectionMat &mat, const string &seq1, const string &seq2, array<string, 3> &output)
+void buildAligment(DirectionMat &mat, const string &seq1, const string &seq2,
+                   array<string, 3> &output)
 {
-    size_t i = mat.getRows() - 1;
-    size_t j = mat.getCols() - 1;
+    size_t i = mat.rows - 1;
+    size_t j = mat.cols - 1;
 
+    // Traceback
     while (i >= 1 || j >= 1)
     {
         uint8_t val = mat.at(i, j);
@@ -159,7 +144,7 @@ void buildAligment(DirectionMat &mat, const string &seq1, const string &seq2, ar
         }
     }
 
-    for(auto &str : output)
+    for (auto &str : output)
         reverse(str.begin(), str.end());
 }
 

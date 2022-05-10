@@ -11,19 +11,42 @@
 
 #include "DirectionMat.h"
 
-DirectionMat::DirectionMat(size_t rows, size_t cols)
+/**
+ * @brief Constructs a new Direction Mat object
+ *
+ * @param rows Total rows
+ * @param cols Total cols
+ */
+DirectionMat::DirectionMat(const size_t rows, const size_t cols) : rows(rows), cols(cols)
 {
-    this->rows = rows;
-    this->cols = cols;
-
     compactCols = (cols / 4) + (cols % 4 != 0);
-
     data = new DirCell[compactCols * rows];
 }
 
+/**
+ * @brief Destroys the Direction Mat object
+ *
+ */
 DirectionMat::~DirectionMat()
 {
     delete[] data;
+}
+
+/**
+ * @brief Prints the given DirectionMat, used for debugging
+ *
+ * @param mat initialized DirectionMat
+ */
+void DirectionMat::print()
+{
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            std::cout << this->at(i, j) << '\t';
+        }
+        std::cout << std::endl;
+    }
 }
 
 /**
@@ -62,41 +85,19 @@ uint8_t DirectionMat::at(size_t row, size_t col)
  */
 void DirectionMat::set(uint8_t val, size_t row, size_t col)
 {
-    size_t index = (compactCols * row) + (col / 4);
-
     switch (col % 4)
     {
     case 0:
-        data[index].d0 = val;
+        data[(compactCols * row) + (col / 4)].d0 = val;
         break;
     case 1:
-        data[index].d1 = val;
+        data[(compactCols * row) + (col / 4)].d1 = val;
         break;
     case 2:
-        data[index].d2 = val;
+        data[(compactCols * row) + (col / 4)].d2 = val;
         break;
     case 3:
-        data[index].d3 = val;
+        data[(compactCols * row) + (col / 4)].d3 = val;
         break;
     }
-}
-
-/**
- * @brief Returns the DirectionMat row size
- *
- * @return size_t
- */
-size_t DirectionMat::getRows()
-{
-    return rows;
-}
-
-/**
- * @brief Returns the DirectionMat column size
- *
- * @return size_t
- */
-size_t DirectionMat::getCols()
-{
-    return cols;
 }

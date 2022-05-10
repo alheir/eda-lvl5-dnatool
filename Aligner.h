@@ -21,7 +21,7 @@ void initMat(DirectionMat &mat);
 int32_t fillMat(DirectionMat &mat, const std::string &seq1, const std::string &seq2);
 
 void buildAligment(DirectionMat &mat, const std::string &seq1, const std::string &seq2,
-              std::array<std::string, 3> &output);
+                   std::array<std::string, 3> &output);
 
 int32_t getGlobalAlignment(const std::string &seq1, const std::string &seq2,
                            std::array<std::string, 3> &alignment);

@@ -24,15 +24,15 @@ bool testMatInit(DirectionMat &mat, DirectionMat &expectedMat)
 {
     initMat(mat);
 
-    if (mat.getRows() != expectedMat.getRows() || mat.getCols() != expectedMat.getCols())
+    if (mat.rows != expectedMat.rows || mat.cols != expectedMat.cols)
     {
         cout << "Mat size init error!\n";
-        cout << "Expected: [" << expectedMat.getRows() << "][" << expectedMat.getCols() << "]\n";
-        cout << "Received: [" << mat.getRows() << "][" << mat.getCols() << "]\n";
+        cout << "Expected: [" << expectedMat.rows << "][" << expectedMat.cols << "]\n";
+        cout << "Received: [" << mat.rows << "][" << mat.cols << "]\n";
         return false;
     }
 
-    for (size_t i = 0; i < mat.getRows(); i++)
+    for (size_t i = 0; i < mat.rows; i++)
     {
         if (mat.at(i, 0) != expectedMat.at(i, 0))
         {
@@ -42,7 +42,7 @@ bool testMatInit(DirectionMat &mat, DirectionMat &expectedMat)
         }
     }
 
-    for (size_t i = 0; i < mat.getCols(); i++)
+    for (size_t i = 0; i < mat.cols; i++)
     {
         if (mat.at(0, i) != expectedMat.at(0, i))
         {
@@ -67,9 +67,9 @@ bool testFillMat(DirectionMat &mat, const string &s1, const string &s2,
         return false;
     }
 
-    for (size_t i = 0; i < mat.getRows(); i++)
+    for (size_t i = 0; i < mat.rows; i++)
     {
-        for (size_t j = 0; j < mat.getCols(); j++)
+        for (size_t j = 0; j < mat.cols; j++)
         {
             if (mat.at(i, j) != expectedMat.at(i, j))
             {
@@ -142,8 +142,8 @@ int main()
     // Expected output
     string expectedSeq1 = "GATTACA";
     string expectedSeq2 = "CGATACG";
-    size_t expectedRows = 8;
-    size_t expectedCols = 8;
+    const size_t expectedRows = 8;
+    const size_t expectedCols = 8;
 
     DirectionMat expectedMat(expectedRows, expectedCols);
     const uint8_t hardcodedMat[8][8] = {
@@ -183,7 +183,8 @@ int main()
     if (extractedSeq1.compare(expectedSeq1))
     {
         cout << "Sequence 1 mismatch\n";
-        cout << extractedSeq1 << "\n!=\n" << expectedSeq1 << endl;
+        cout << extractedSeq1 << "\n!=\n"
+             << expectedSeq1 << endl;
         return -1;
     }
     cout << "Sequence 1 extraction success!  > " << extractedSeq1 << endl;
@@ -191,7 +192,8 @@ int main()
     if (!getSequence(extractedSeq2, sampleFile2))
     {
         cout << "Failure in sequence 2 extraction\n";
-        cout << extractedSeq2 << "\n!=\n" << expectedSeq2 << endl;
+        cout << extractedSeq2 << "\n!=\n"
+             << expectedSeq2 << endl;
         return -1;
     }
     if (extractedSeq2.compare(expectedSeq2))

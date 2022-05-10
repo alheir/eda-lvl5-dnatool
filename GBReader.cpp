@@ -17,8 +17,8 @@ using namespace std;
 
 /**
  * @brief Checks if a given character is not 'a', 'c', 'g' or 't'.
- * 
- * @param c 
+ *
+ * @param c
  * @return true It's not
  * @return false It is
  */
@@ -29,9 +29,9 @@ bool isNotACGT(char c)
 
 /**
  * @brief Extracts an acgt-like string from a GenBank file
- * 
+ *
  * @param output String to store the acgt sequence
- * @param file ifstream file handler.
+ * @param file istream file handler.
  * @return true Success
  * @return false Failure
  */
@@ -48,7 +48,7 @@ bool getSequence(string &output, istream &file)
             break;
     }
 
-    if(!checker)
+    if (!checker)
         return false;
 
     while (getline(file, tempStr))
@@ -61,7 +61,7 @@ bool getSequence(string &output, istream &file)
         output.append(tempStr);
     }
 
-    if(!checker)
+    if (!checker)
         return false;
 
     for (auto &ch : output)
