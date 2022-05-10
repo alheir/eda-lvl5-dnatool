@@ -1,3 +1,6 @@
+Elapsed time in milliseconds: 31587 ms
+Elapsed time in seconds: 31 s
+
 Secuencias comparadas: 
 	../reference/Wuhan reference genome - NC_045512.2.txt
 	SARS-CoV-2003.txt
@@ -2059,5 +2062,3 @@ TAGCTTCTTAGGAGAATGACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 TAGCTTCTTAGGAGAATGAC---------------------------------
 
 
-Elapsed time in milliseconds: 31851 ms
-Elapsed time in seconds: 31 s

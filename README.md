@@ -16,8 +16,8 @@
   * Delta B.1.617.2 - OM202516
   * Puntaje óptimo: 29826
 * Mystery genome 2 - MT345875
-  * Beta B.1.351 - MZ314996
-  * Puntaje óptimo: 29865
+  * Wuhan reference genome - NC_045512.2
+  * Puntaje óptimo: 29885
 * Mystery genome 3 - OU772970
   * Delta B.1.617.2 - OM202516
   * Puntaje óptimo: 29840

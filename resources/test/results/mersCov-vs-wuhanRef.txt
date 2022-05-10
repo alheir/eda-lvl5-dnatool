@@ -1,4 +1,4 @@
-Elapsed time in milliseconds: 33784 ms
+Elapsed time in milliseconds: 33232 ms
 Elapsed time in seconds: 33 s
 
 Secuencias comparadas: 
