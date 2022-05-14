@@ -1,52 +1,81 @@
+/**
+ * @file main.cpp
+ * @authors DALZOTTO, Rafael; HEIR, Alejandro - Grupo 7
+ * @brief Runs the genetic sequence aligner
+ * @version 0.1
+ * @date 2022-05-08
+ *
+ * @copyright Copyright (c) 2022 - 22.08 EDA - ITBA
+ *
+ */
+
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <algorithm>
+#include <chrono>
 
-#include "Needlemachine.h"
+#include "GBReader.h"
+#include "Aligner.h"
 
 using namespace std;
+using namespace chrono;
 
-static const int splitter = 60;
+static const int splitInterval = 60;
 
-void getSequence(string &output, ifstream &file);
-
-bool isACGT(char c);
+void printElapsedFrom(time_point<steady_clock> &timestamp);
 
 int main(int argc, char **argv)
 {
-    string seq1 = "GATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACAGATTACA";
-    string seq2 = "CGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACGCGATACG";
-    array<string,3> optimalAlignment;
-    long optimalScore;
+    auto startTime = steady_clock::now();
 
     ifstream sample1(argv[1]);
-    if(!sample1.is_open())
+    if (!sample1.is_open())
     {
         cout << "Error opening " << argv[1] << endl;
         return 1;
     }
 
     ifstream sample2(argv[2]);
-    if(!sample2.is_open())
+    if (!sample2.is_open())
     {
         cout << "Error opening " << argv[2] << endl;
         return 1;
     }
 
-    getSequence(seq1, sample1);
-    getSequence(seq2, sample2);
+    string seq1;
+    if (!getSequence(seq1, sample1))
+    {
+        cout << "Error extracting first sequence...\n";
+        return 1;
+    }
+    sample1.close();
+
+    string seq2;
+    if (!getSequence(seq2, sample2))
+    {
+        cout << "Error extracting second sequence...\n";
+        return 1;
+    }
+    sample2.close();
+
+    array<string, 3> optimalAlignment;
+    int32_t optimalScore;
 
     optimalScore = getGlobalAlignment(seq1, seq2, optimalAlignment);
 
-    cout << "Puntaje óptimo: " << optimalScore << endl << endl;
-    cout << "Alineamiento óptimo: " << endl << endl;
+    printElapsedFrom(startTime);
 
-    for (int i = 0; i < optimalAlignment[0].length(); i += splitter)
+    cout << "\nSecuencias comparadas: \n";
+    cout << '\t' << argv[1] << endl;
+    cout << '\t' << argv[2] << endl;
+
+    cout << "\nPuntaje óptimo: " << optimalScore;
+    cout << "\n\nAlineamiento óptimo: \n\n";
+
+    for (int i = 0; i < optimalAlignment[0].length(); i += splitInterval)
     {
-        cout << optimalAlignment[0].substr(i, splitter).data() << endl;
-        cout << optimalAlignment[1].substr(i, splitter).data() << endl;
-        cout << optimalAlignment[2].substr(i, splitter).data() << endl << endl;
+        cout << optimalAlignment[0].substr(i, splitInterval).data() << endl;
+        cout << optimalAlignment[1].substr(i, splitInterval).data() << endl;
+        cout << optimalAlignment[2].substr(i, splitInterval).data() << "\n\n";
     }
 
     cout << endl;
@@ -54,29 +83,14 @@ int main(int argc, char **argv)
     return 0;
 }
 
-void getSequence(string &output, ifstream &file)
+void printElapsedFrom(time_point<steady_clock> &timestamp)
 {
-    output.clear();
-    string tempStr;
+    auto now = steady_clock::now();
 
-    while (getline(file, tempStr))
-    {
-        if (tempStr.substr(0, 6) == "ORIGIN")
-            break;
-    }
-
-    while (getline(file, tempStr))
-    {
-        if (tempStr.substr(0, 2) == "//")
-            break;
-
-        tempStr.erase(remove_if(tempStr.begin(), tempStr.end(), isACGT), tempStr.end());
-
-        output.append(tempStr);
-    }
-}
-
-bool isACGT(char c)
-{
-    return !(c == 'a' || c == 'c' || c == 'g' || c == 't');
+    cout << "Elapsed time in milliseconds: "
+         << duration_cast<milliseconds>(now - timestamp).count()
+         << " ms" << endl;
+    cout << "Elapsed time in seconds: "
+         << duration_cast<seconds>(now - timestamp).count()
+         << " s" << endl;
 }

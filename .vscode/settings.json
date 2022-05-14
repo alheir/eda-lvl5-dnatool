@@ -44,14 +44,16 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "bit": "cpp",
-        "cstring": "cpp"
+        "cstring": "cpp",
+        "chrono": "cpp",
+        "variant": "cpp"
     },
     "cmake.debugConfig": {
         "args": [
             "\"../resources/reference/Alpha B.1.1.7 - MZ314997.txt\"",
-            "\"../resources/reference/Delta B.1.617.2 - OM202516.txt\"",
+            "\"../resources/reference/Beta B.1.351 - MZ314996.txt\"",
             ">",
-            "output.txt"
+            "\"output.txt\""
         ],
     },
 }
